@@ -38,6 +38,68 @@ from rdkit.Chem import RWMol, Atom, BondType
 import sys
 from collections import deque
 
+
+# ═══════════════════════════════════════════════════════════════════════
+#  Configuration de la page
+# ═══════════════════════════════════════════════════════════════════════
+
+st.set_page_config(
+    page_title="Convertisseur SMILES ↔ NLF",
+    page_icon="🧪",
+    layout="wide",
+)
+
+# ── Style CSS personnalisé ──────────────────────────────────────────
+st.markdown("""
+<style>
+    .main-title {
+        text-align: center;
+        color: #1E3A5F;
+        margin-bottom: 0;
+    }
+    .sub-title {
+        text-align: center;
+        color: #666;
+        font-size: 1rem;
+        margin-top: 0;
+    }
+    .result-box {
+        background-color: #f0f2f6;
+        border-left: 4px solid #1E88E5;
+        padding: 15px;
+        border-radius: 0 8px 8px 0;
+        font-family: 'Courier New', monospace;
+        font-size: 1.1rem;
+        word-break: break-all;
+        margin: 10px 0;
+    }
+    .nlf-box {
+        border-left-color: #7B1FA2;
+    }
+    .smiles-box {
+        border-left-color: #2E7D32;
+    }
+    .error-box {
+        background-color: #fce4ec;
+        border-left: 4px solid #c62828;
+        padding: 15px;
+        border-radius: 0 8px 8px 0;
+    }
+    .legend-title {
+        font-weight: 600;
+        color: #1E3A5F;
+        margin-bottom: 5px;
+    }
+    .stTabs [data-baseweb="tab-list"] {
+        gap: 8px;
+    }
+    .stTabs [data-baseweb="tab"] {
+        padding: 10px 24px;
+        font-weight: 500;
+    }
+</style>
+""", unsafe_allow_html=True)
+
 # ═══════════════════════════════════════════════════════════════════════
 # ═══════════════════════════════════════════════════════════════════════
 #  Introduction
