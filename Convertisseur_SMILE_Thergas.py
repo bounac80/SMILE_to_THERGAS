@@ -100,12 +100,13 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
+st.image('Gemini_Generated_Image_ve3u4zve3u4zve3u.png',width=850)
 
 st.markdown('<h1 class="main-title">🧪 Convertisseur SMILES ↔ NLF</h1>', unsafe_allow_html=True)
 st.markdown('<p class="sub-title">Nancy Linear Form — LRGP, Université de Lorraine<br>'
             '<em>Côme & Muller (1984) · Muller (1987) . Blurock et al. (2012) . etc ...</em></p>', unsafe_allow_html=True)
 
-
+st.markdown("<hr style='height: 2px; background-color: #333;'>", unsafe_allow_html=True)
 
 
 # ═══════════════════════════════════════════════════════════════════════
@@ -114,27 +115,9 @@ st.markdown('<p class="sub-title">Nancy Linear Form — LRGP, Université de Lor
 # ═══════════════════════════════════════════════════════════════════════
 # ═══════════════════════════════════════════════════════════════════════
 
-st.image('Gemini_Generated_Image_ve3u4zve3u4zve3u.png',width=850)
-#st.image('Image3.JPG',width=850)
-st.title('Accurate Prediction of Heat Capacity Cp(T) for Gaseous Compounds Using Machine Learning: Data Augmentation and Ensemble Learning for Robust Thermodynamic Modeling')
-st.subheader('Method available for molecules containing hydrogen (H), carbon (C), nitrogen (N), oxygen (O), sulfur (S), phosphorus (P), fluorine (F), chlorine (Cl), bromine (Br) and iodine (I) atoms')
-st.markdown("***Roda Bounaceur, Francisco Paes, Romain Privat, Jean-Noël Jaubert***")
 st.markdown("***Université de Lorraine, CNRS, LRGP, F-54000 Nancy, France***")
 st.write("----------------------------------------------------------")
-
-st.write('For more information you dowload the related paper : [Download PDF](https://rdcu.be/eC77w))')
-
-st.write("----------------------------------------------------------")
-#st.image('Image2.JPG',width=500)
-
-st.header("_Model based on a QSPR approach coupled with a Bootstrap Aggregating method_")
 st.write("")
-st.write("Bootstrap aggregating, also called bagging, is a machine learning ensemble meta-algorithm designed to improve the stability and accuracy of machine learning algorithms used in statistical classification and regression.")
-st.write("It also reduces variance and helps to avoid overfitting. Although it is usually applied to decision tree methods, it can be used with any type of method. Bagging is a special case of the model averaging approach.")
-
-st.write("We propose a robust deep-learning model based on a Quantitative Structure−Property Relationship (QSPR) approach for estimating the Heat Capacity versus Temperature of any C, H, O, N, S, P, F, Cl, Br, I molecule (Perfect gases asumption). The Mordred calculator was used to determine 247 descriptors to characterize the molecules considered in this work. For each evaluated property, multiple neural networks were trained within a bagging framework. The predictions from the final ensemble were successfully tested against a large set of experimental data comprising more than 1,700 molecules and compared with those from different recent learning models found in the literature. Comprehensive comparisons and extensive testing highlight the robustness and predictive power of the newly proposed multimodal learning model.")
-st.write("")
-
 st.markdown('<a href="mailto:roda.bounaceur@univ-lorraine.fr"> If you have any problems please Contact us !</a>', unsafe_allow_html=True)
 
 
