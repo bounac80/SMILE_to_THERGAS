@@ -46,7 +46,7 @@ from collections import deque
 st.set_page_config(
     page_title="Convertisseur SMILES ↔ NLF",
     page_icon="🧪",
-    layout="wide",
+    #layout="wide",
 )
 
 # ── Style CSS personnalisé ──────────────────────────────────────────
