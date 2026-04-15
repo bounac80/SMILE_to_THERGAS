@@ -100,6 +100,18 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
+
+st.markdown('<h1 class="main-title">🧪 Convertisseur SMILES ↔ NLF</h1>', unsafe_allow_html=True)
+st.markdown('<p class="sub-title">Nancy Linear Form — LRGP, Université de Lorraine<br>'
+            '<em>Côme & Muller (1984) · Blurock et al. (2012)</em></p>', unsafe_allow_html=True)
+
+st.divider()
+
+# ── Onglets principaux ──────────────────────────────────────────────
+tab1, tab2, tab3 = st.tabs(["⟶  SMILES → NLF", "⟵  NLF → SMILES", "📖  Aide & règles"])
+
+
+
 # ═══════════════════════════════════════════════════════════════════════
 # ═══════════════════════════════════════════════════════════════════════
 #  Introduction
