@@ -35,6 +35,8 @@ from matplotlib.offsetbox import OffsetImage, AnnotationBbox
 import re
 from rdkit import Chem
 from rdkit.Chem import RWMol, Atom, BondType
+from rdkit.Chem import Draw, AllChem
+from io import BytesIO
 import sys
 from collections import deque
 
@@ -482,3 +484,112 @@ nlf = re.sub(r"s\(//o\)\(//o\)",   "'so2'", nlf)
 
 st.markdown(f"Thergas notation: ``{nlf}``")
 st.write('')
+
+st.markdown("<hr style='height: 2px; background-color: #333;'>", unsafe_allow_html=True)
+
+# ═══════════════════════════════════════════════════════════════════════
+# ═══════════════════════════════════════════════════════════════════════
+#  Partie pré-enregistrée
+# ═══════════════════════════════════════════════════════════════════════
+# ═══════════════════════════════════════════════════════════════════════
+
+# ── Exemples ────────────────────────────────────────────────────────
+EXEMPLES_SMILES = {
+    "Butane":            "CCCC",
+    "Benzène":           "c1ccccc1",
+    "Toluène":           "Cc1ccccc1",
+    "Naphtalène":        "c1ccc2ccccc2c1",
+    "Aspirine":          "CC(=O)Oc1ccccc1C(=O)O",
+    "2-Butanone":        "CC(=O)CC",
+    "Acide acétique":    "CC(=O)O",
+    "Acétonitrile":      "CC#N",
+    "TNT":               "CC1=C(C=C(C=C1[N+](=O)[O-])[N+](=O)[O-])[N+](=O)[O-]",
+    "Cyclohexane":       "C1CCCCC1",
+    "Furane":            "c1ccoc1",
+    "DMSO":              "CS(C)=O",
+    "1-Propanol":        "CCCO",
+    "Propyne":           "C#CC",
+    "Acetone":           "CC(=O)C",
+    "roda1":             "FC(F)(F)C(F)(F)C(F)(F)C(F)(F)C(F)(F)C(F)F",
+    "roda2":            "C1=CC=CC2=C1S(=O)(=O)NC2(=O)",
+    "roda3":            "C/C=C/c1cc(OC)c(c(c1)OC)O",
+    "roda4":            "OB(O)C1=CC(Cl)=CN=C1F",
+    "roda5":            "CP(C)(=O)CO",
+    "roda6":            "COc1ccc(P(Cl)Cl)cc1",
+    "roda7":            "N#CNN",
+    "roda8":            "c1ccc2cc(Cc3ccsc3)ccc2c1",
+    "roda9":            "Cc1cc(Cl)c2cc(I)ccc2c1",  
+    "roda radical1":    "C=C[CH]",
+    "roda radical 2":    "[CH2]c1ccccc1"
+}
+
+
+
+st.subheader("Entrée SMILES")
+
+col_input, col_result = st.columns([1, 1])
+
+with col_input:
+    st.subheader("Entrée SMILES")
+
+    # Sélection d'exemple
+    choix = st.selectbox(
+        "Choisir un exemple :",
+        ["— Saisie libre —"] + list(EXEMPLES_SMILES.keys()),
+        key="ex_s2n"
+    )
+
+    if choix != "— Saisie libre —":
+        default_smi = EXEMPLES_SMILES[choix]
+    else:
+        default_smi = ""
+
+    smiles_input = st.text_input(
+        "Notation SMILES :",
+        value=default_smi,
+        placeholder="Ex: c1ccccc1  ou  CC(=O)O",
+        key="smi_input"
+    )
+
+    convert_s2n = st.button("🔄 Convertir en NLF", type="primary", key="btn_s2n")
+
+with col_result:
+    st.subheader("Résultat")
+
+    if convert_s2n and smiles_input.strip():
+        smi = smiles_input.strip()
+        try:
+            # Canonisation
+            mol = Chem.MolFromSmiles(smi)
+            if mol is None:
+                raise ValueError("SMILES invalide")
+            can = Chem.MolToSmiles(mol)
+
+            # Conversion
+            nlf_result = smiles_to_nlf(smi)
+            #nlf_result = apply_post_regex(nlf_result)
+            nlf_result = re.sub(r"o/s\(//o\)\(o\)//o", "'so4'", nlf_result)
+            nlf_result = re.sub(r"s\(//o\)\(oh\)//o", "'so3h'", nlf_result)
+            nlf_result = re.sub(r"s\(//o\)\(o\)//o",  "'so3'", nlf_result)
+            nlf_result = re.sub(r"s\(//o\)\(//o\)",   "'so2'", nlf_result)
+
+            st.markdown("**SMILES canonique :**")
+            st.markdown(f'<div class="result-box smiles-box">{can}</div>',
+                        unsafe_allow_html=True)
+
+            st.markdown("**Notation NLF :**")
+            st.markdown(f'<div class="result-box nlf-box">{nlf_result}</div>',
+                        unsafe_allow_html=True)
+
+            # Image de la molécule
+            img = draw_molecule(can)
+            if img:
+                st.image(img, caption=f"Structure 2D", width=300)
+
+        except Exception as e:
+            st.markdown(f'<div class="error-box">❌ Erreur : {e}</div>',
+                        unsafe_allow_html=True)
+
+    elif convert_s2n:
+        st.warning("Veuillez entrer une notation SMILES.")
+
