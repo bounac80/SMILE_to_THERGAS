@@ -108,7 +108,7 @@ st.markdown('<p class="sub-title">Nancy Linear Form — LRGP, Université de Lor
 st.divider()
 
 # ── Onglets principaux ──────────────────────────────────────────────
-tab1, tab2, tab3 = st.tabs(["⟶  SMILES → NLF", "⟵  NLF → SMILES", "📖  Aide & règles"])
+#tab1, tab2, tab3 = st.tabs(["⟶  SMILES → NLF", "⟵  NLF → SMILES", "📖  Aide & règles"])
 
 
 
