@@ -114,7 +114,7 @@ st.markdown('<p class="sub-title">Nancy Linear Form — LRGP, Université de Lor
 # ═══════════════════════════════════════════════════════════════════════
 # ═══════════════════════════════════════════════════════════════════════
 
-#st.image('Image1.JPG',width=850)
+st.image('Gemini_Generated_Image_ve3u4zve3u4zve3u.png',width=850)
 #st.image('Image3.JPG',width=850)
 st.title('Accurate Prediction of Heat Capacity Cp(T) for Gaseous Compounds Using Machine Learning: Data Augmentation and Ensemble Learning for Robust Thermodynamic Modeling')
 st.subheader('Method available for molecules containing hydrogen (H), carbon (C), nitrogen (N), oxygen (O), sulfur (S), phosphorus (P), fluorine (F), chlorine (Cl), bromine (Br) and iodine (I) atoms')
