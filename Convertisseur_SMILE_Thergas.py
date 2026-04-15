@@ -493,6 +493,18 @@ st.markdown("<hr style='height: 2px; background-color: #333;'>", unsafe_allow_ht
 # ═══════════════════════════════════════════════════════════════════════
 # ═══════════════════════════════════════════════════════════════════════
 
+def draw_molecule(smiles, size=(350, 250)):
+    """Génère une image PNG de la molécule à partir du SMILES."""
+    mol = Chem.MolFromSmiles(smiles)
+    if mol is None:
+        return None
+    AllChem.Compute2DCoords(mol)
+    img = Draw.MolToImage(mol, size=size)
+    buf = BytesIO()
+    img.save(buf, format='PNG')
+    buf.seek(0)
+    return buf
+    
 # ── Exemples ────────────────────────────────────────────────────────
 EXEMPLES_SMILES = {
     "Butane":            "CCCC",
