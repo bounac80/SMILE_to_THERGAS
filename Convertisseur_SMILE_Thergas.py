@@ -552,7 +552,7 @@ with col_input:
     choix = st.selectbox(
         "Choisir un exemple :",
         ["— Saisie libre —"] + list(EXEMPLES_SMILES.keys()),
-        key="ex_s2n"
+        key="ex_s2n",
         on_change=_on_select_s2n
     )
 
