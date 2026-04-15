@@ -104,7 +104,7 @@ st.markdown("""
 
 st.image('Gemini_Generated_Image_ve3u4zve3u4zve3u.png',width=850)
 
-st.markdown('<h1 class="main-title">🧪 Convertisseur SMILES ↔ NLF</h1>', unsafe_allow_html=True)
+st.markdown('<h1 class="main-title">🧪 Convertisseur SMILES ↔ NLF (Thergas notation)</h1>', unsafe_allow_html=True)
 st.markdown('<p class="sub-title">Nancy Linear Form — LRGP, Université de Lorraine<br>'
             '<em>Côme & Muller (1984) · Muller (1987) . Blurock et al. (2012) . etc ...</em></p>', unsafe_allow_html=True)
 
@@ -541,12 +541,19 @@ col_input, col_result = st.columns([1, 1])
 
 with col_input:
     st.subheader("Entrée SMILES")
+    
+    # Callback : quand le selectbox change, on met à jour le text_input
+    def _on_select_s2n():
+        choix = st.session_state.ex_s2n          # lit la nouvelle sélection
+        if choix != "— Saisie libre —":
+            st.session_state.smi_input = EXEMPLES_SMILES[choix]  # écrit dans le text_input
 
     # Sélection d'exemple
     choix = st.selectbox(
         "Choisir un exemple :",
         ["— Saisie libre —"] + list(EXEMPLES_SMILES.keys()),
         key="ex_s2n"
+        on_change=_on_select_s2n
     )
 
     if choix != "— Saisie libre —":
