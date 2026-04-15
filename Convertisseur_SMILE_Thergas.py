@@ -511,21 +511,19 @@ EXEMPLES_SMILES = {
     "Propyne":           "C#CC",
     "Acetone":           "CC(=O)C",
     "roda1":             "FC(F)(F)C(F)(F)C(F)(F)C(F)(F)C(F)(F)C(F)F",
-    "roda2":            "C1=CC=CC2=C1S(=O)(=O)NC2(=O)",
-    "roda3":            "C/C=C/c1cc(OC)c(c(c1)OC)O",
-    "roda4":            "OB(O)C1=CC(Cl)=CN=C1F",
-    "roda5":            "CP(C)(=O)CO",
-    "roda6":            "COc1ccc(P(Cl)Cl)cc1",
-    "roda7":            "N#CNN",
-    "roda8":            "c1ccc2cc(Cc3ccsc3)ccc2c1",
-    "roda9":            "Cc1cc(Cl)c2cc(I)ccc2c1",  
-    "roda radical1":    "C=C[CH]",
-    "roda radical 2":    "[CH2]c1ccccc1"
+    "roda2":             "C1=CC=CC2=C1S(=O)(=O)NC2(=O)",
+    "roda3":             "C/C=C/c1cc(OC)c(c(c1)OC)O",
+    "roda4":             "OB(O)C1=CC(Cl)=CN=C1F",
+    "roda5":             "CP(C)(=O)CO",
+    "roda6":             "COc1ccc(P(Cl)Cl)cc1",
+    "roda7":             "N#CNN",
+    "roda8":             "c1ccc2cc(Cc3ccsc3)ccc2c1",
+    "roda9":             "Cc1cc(Cl)c2cc(I)ccc2c1",  
+    "roda radical1":     "C=C[CH]",
+    "roda radical 2":    "[CH2]c1ccccc1",
 }
 
-
-
-st.subheader("Entrée SMILES")
+#st.subheader("Entrée SMILES")
 
 col_input, col_result = st.columns([1, 1])
 
