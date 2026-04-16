@@ -413,11 +413,24 @@ def smiles_to_nlf(smiles):
             if ri in processed_ri:
                 processed.update(atom_rings[ri])
         
+        # CORRECTIF 2 : pré-labelliser TOUTES les jonctions de TOUS les cycles
+        # de ce système (pas seulement celles du cycle primaire)
+        sys_atoms = set()
+        for ri in rorder: sys_atoms.update(atom_rings[ri])
+        for a in sys_atoms:
+            if a in junctions: _lbl(a)
+            
+        
+        # CORRECTIF 3 : si des cycles ont déjà été traités (via deferred),
+        # le premier cycle restant ne doit PAS être traité comme primaire ;
+        # il doit être secondaire pour utiliser les labels existants
+        any_already_processed = any(ri in processed_ri for ri in rorder)
         for rp, ri in enumerate(rorder):
             if ri in processed_ri: continue
             processed_ri.add(ri)
             ring=atom_rings[ri]; rset=set(ring)
-            if rp==0:
+            is_primary = (rp == 0 and not any_already_processed)
+            if is_primary:
                 start=ring[0]
                 for a in ring:
                     if a in junctions: start=a; break
@@ -448,7 +461,10 @@ def smiles_to_nlf(smiles):
                     a=path[i]; ch+=bsep(path[i-1],a)
                     if a in shared and a==path[-1]: ch+=str(labels[a])
                     else: ch+=_emit(a,rset,deferred_chains)
-                chains.append(ch); processed.update(path)
+                
+                chains.append(ch); processed.update(rset)  # CORRECTIF 4 : tout le cycle, pas juste path
+                #chains.append(ch); processed.update(path)
+                
 
     ring_systems.sort(key=lambda c:-sum(len(atom_rings[r]) for r in c))
     _proc_fused(ring_systems[0])
@@ -482,7 +498,15 @@ def smiles_to_nlf(smiles):
             if dest_ri is not None:
                 ring=atom_rings[dest_ri]; rset=set(ring)
                 processed_ri.add(dest_ri); _lbl(cur)
+                # CORRECTIF 5 : pré-labelliser TOUTES les jonctions du système
+                for rsys in ring_systems:
+                    if dest_ri in rsys:
+                        for ri2 in rsys:
+                            for a2 in atom_rings[ri2]:
+                                if a2 in junctions: _lbl(a2)
+                        break
                 ch+=bsep(pv,cur); order=_rwalk(ring,cur)
+                
                 for i,a in enumerate(order):
                     if i>0: ch+=bsep(order[i-1],a)
                     ch+=_emit(a,rset,deferred_chains)
