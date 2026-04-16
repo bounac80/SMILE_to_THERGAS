@@ -39,6 +39,7 @@ from matplotlib.offsetbox import OffsetImage, AnnotationBbox
 import re
 from rdkit import Chem
 from rdkit.Chem import RWMol, Atom, BondType
+from rdkit.Chem import Draw, AllChem
 import sys
 from io import BytesIO
 from collections import deque
