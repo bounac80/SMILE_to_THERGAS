@@ -974,8 +974,11 @@ st.markdown("""
 | C=O | `co` | Carbonyl |
 | NO₂ | `'no2'` | Nitro |
 | C≡N | `cn` | Nitrile |
-| SO₂ | `'so2'` | Sulfonyle |
 | SO | `so` | Sulfinyle |
+| SO₂ | `'so2'` | Sulfonyle |
+| SO3 | `'so3'` | S2 |
+| SO4 | `'so4'` | S3 |
+| SO3H | `'so3h'` | S4 |
 | C=S | `cs` | Thiocarbonyle |
 | F | `f` | Fluor |
 | Cl | `'cl'` | Chlore |
